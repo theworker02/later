@@ -1,0 +1,14 @@
+{
+  "title": "later job v1",
+  "type": "object",
+  "required": ["format", "handler", "run_at"],
+  "properties": {
+    "format": { "const": "later.job.v1" },
+    "handler": { "type": "string" },
+    "run_at": { "type": "number" },
+    "priority": { "enum": ["critical", "high", "normal", "low", "background"] },
+    "queue": { "type": "string" },
+    "args": { "type": ["array", "object", "null"] }
+  },
+  "additionalProperties": true
+}

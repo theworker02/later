@@ -1,0 +1,22 @@
+name: Release validation
+
+on:
+  push:
+    tags: ['v*']
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+      - run: bundle exec rake test
+      - run: gem build later.gemspec
+      - run: ruby scripts/verify_gem later-*.gem
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gem
+          path: later-*.gem

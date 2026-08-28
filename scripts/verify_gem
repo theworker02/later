@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "rubygems/package"
+
+path = ARGV.fetch(0) { Dir["later-*.gem"].first }
+abort "gem artifact not found" unless path
+entries = []
+File.open(path, "rb") do |io|
+  Gem::Package::TarReader.new(io).each { |entry| entries << entry.full_name }
+end
+abort "gem contains database files" if entries.any? { |entry| entry.match?(/\.sqlite|\.db\z/) }
+puts "Verified #{path}: #{entries.length} entries"

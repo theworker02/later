@@ -1,0 +1,139 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "optparse"
+require "json"
+require "later"
+require "later/simulation/schedule_simulator"
+require "later/lint/linter"
+
+command = ARGV.shift || "help"
+db = ENV["LATER_DB"]
+options = { format: "table" }
+OptionParser.new do |parser|
+  parser.on("--db PATH") { |value| db = value }
+  parser.on("--state STATE") { |value| options[:state] = value }
+  parser.on("--json") { options[:format] = "json" }
+  parser.on("--format FORMAT") { |value| options[:format] = value }
+  parser.on("--next COUNT", Integer) { |value| options[:next] = value }
+  parser.on("--timezone ZONE") { |value| options[:timezone] = value }
+  parser.on("--group GROUP") { |value| options[:group] = value }
+  parser.on("--from OFFSET", Integer) { |value| options[:from] = value }
+  parser.on("--to OFFSET", Integer) { |value| options[:to] = value }
+  parser.on("--type TYPE") { |value| options[:type] = value }
+  parser.on("--data JSON") { |value| options[:data] = JSON.parse(value) }
+end.parse!(ARGV)
+
+scheduler = db ? Later.configure(path: db) : Later.scheduler
+
+case command
+when "run", "worker", "start"
+  puts "later: polling #{db || ENV.fetch("LATER_DB", ".later/later.sqlite3")} (Ctrl+C to stop)"
+  scheduler.run_forever
+when "list", "jobs"
+  jobs = scheduler.list(state: options[:state])
+  puts(options[:format] == "json" ? JSON.pretty_generate(jobs) : jobs.map { |job| "#{job["public_id"] || "##{job["id"]}"} #{job["state"]} priority=#{job["priority"]} queue=#{job["queue"]} #{Time.at(job["run_at"]).iso8601}" })
+when "inspect"
+  abort "usage: later inspect ID" unless ARGV.first
+  puts JSON.pretty_generate(scheduler.inspect(ARGV.first))
+when "cancel"
+  abort "usage: later cancel ID" unless ARGV.first
+  scheduler.cancel(ARGV.first)
+when "retry"
+  abort "usage: later retry ID" unless ARGV.first
+  scheduler.retry(ARGV.first)
+when "dead"
+  scheduler.list(state: "dead").each { |job| puts "#{job["public_id"]} #{job["last_error"]}" }
+when "history"
+  puts JSON.pretty_generate(scheduler.event_history)
+when "simulate"
+  expression = ARGV.join(" ")
+  abort "usage: later simulate '15m' [--next 10]" if expression.empty?
+  Later::Simulation::ScheduleSimulator.new(expression, timezone: options[:timezone]).next_occurrences(options[:next] || 10).each { |time| puts time.iso8601 }
+when "lint"
+  offenses = Later::Lint::Linter.new.schedule(ARGV.join(" "))
+  puts JSON.pretty_generate(offenses.map(&:to_h))
+  exit 1 if offenses.any? { |offense| offense.severity == :error }
+when "stream"
+  subcommand = ARGV.shift || "list"
+  stream_name = ARGV.shift
+  stream = stream_name && Later.stream(stream_name)
+  case subcommand
+  when "create"
+    abort "usage: later stream create NAME" unless stream_name
+    puts "created #{stream_name}"
+  when "list"
+    names = scheduler.persistence.instance_variable_get(:@db).execute("SELECT name FROM streams ORDER BY name").map { |row| row["name"] }
+    puts(options[:format] == "json" ? JSON.generate(names) : names)
+  when "publish"
+    abort "usage: later stream publish NAME --type TYPE --data JSON" unless stream && options[:type]
+    puts JSON.pretty_generate(stream.publish(type: options[:type], data: options[:data] || {} ).to_h)
+  when "inspect", "history", "replay"
+    abort "usage: later stream #{subcommand} NAME" unless stream
+    events = stream.read(from: options[:from] || 0, type: options[:type])
+    events = events.select { |event| event.offset <= options[:to] } if options[:to]
+    events.each { |event| puts(options[:format] == "json" ? JSON.generate(event.to_h) : "#{event.offset} #{event.type} #{event.timestamp.iso8601} #{event.data}") }
+  when "query"
+    abort "usage: later stream query NAME --type TYPE" unless stream
+    stream.where(type: options[:type]).each { |event| puts JSON.generate(event.to_h) }
+  when "rewind"
+    abort "usage: later stream rewind NAME --group GROUP --from OFFSET" unless stream && options[:group] && options[:from]
+    stream.rewind(options[:group], to: options[:from])
+  when "lag"
+    abort "usage: later stream lag NAME --group GROUP" unless stream && options[:group]
+    puts stream.lag(options[:group])
+  when "consume"
+    abort "usage: later stream consume NAME --group GROUP" unless stream && options[:group]
+    consumer = stream[options[:group]]
+    if (event = consumer.next)
+      puts JSON.pretty_generate(event.to_h)
+      consumer.ack(event)
+    end
+  when "compact"
+    abort "usage: later stream compact NAME" unless stream
+    puts "deleted #{stream.compact!} events"
+  else
+    abort "unknown stream command #{subcommand}"
+  end
+when "doctor"
+  puts JSON.pretty_generate(Later.doctor)
+when "db"
+  abort "usage: later db check" unless ARGV.shift == "check"
+  puts "Database OK: #{scheduler.persistence.path}"
+else
+  puts <<~HELP
+    Usage: later <command> [options]
+
+    Commands:
+      run, worker, start       Poll and execute due jobs
+      list, jobs               List persisted jobs (--json, --state STATE)
+      inspect ID               Show a job and its event timeline
+      history                  Show durable event history
+      dead                     List jobs exhausted by retries
+      retry ID                 Retry a failed job now
+      cancel ID                Cancel a scheduled job
+      simulate EXPRESSION      Show next recurrence times
+      lint EXPRESSION          Validate a recurrence expression
+      stream create NAME       Create a durable stream
+      stream list              List streams
+      stream publish NAME      Publish with --type TYPE --data JSON
+      stream history NAME      Inspect stream history
+      stream replay NAME       Replay from --from OFFSET
+      stream consume NAME     Consume one event with --group GROUP
+      stream rewind NAME       Rewind --group GROUP --from OFFSET
+      stream lag NAME          Show group lag
+      stream query NAME        Query with --type TYPE
+      stream compact NAME      Apply configured retention
+      doctor                   Report local runtime health
+      db check                 Check database accessibility
+
+    Options:
+      --db PATH               SQLite database path
+      --json                   JSON output
+      --group GROUP            Consumer group
+      --from OFFSET            Starting offset
+      --to OFFSET              Ending offset
+      --type TYPE              Event type
+      --data JSON              Event payload
+  HELP
+end

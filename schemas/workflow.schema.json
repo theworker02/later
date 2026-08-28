@@ -1,0 +1,16 @@
+{
+  "title": "later workflow v1",
+  "type": "object",
+  "required": ["name", "nodes"],
+  "properties": {
+    "name": { "type": "string" },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "after"],
+        "properties": { "name": { "type": "string" }, "after": { "type": "array", "items": { "type": "string" } } }
+      }
+    }
+  }
+}
