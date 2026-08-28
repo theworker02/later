@@ -1,19 +1,22 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    rake (13.2.1)
+    rake (13.4.2)
     sqlite3 (2.7.4-x64-mingw-ucrt)
+    sqlite3 (2.7.4-x86_64-linux-gnu)
 
 PLATFORMS
   x64-mingw-ucrt
+  x86_64-linux
 
 DEPENDENCIES
-  rake (= 13.2.1)
+  rake (= 13.4.2)
   sqlite3 (= 2.7.4)
 
 CHECKSUMS
-  rake (13.2.1) sha256=46cb38dae65d7d74b6020a4ac9d48afed8eb8149c040eccf0523bec91907059d
+  rake (13.4.2) sha256=cb825b2bd5f1f8e91ca37bddb4b9aaf345551b4731da62949be002fa89283701
   sqlite3 (2.7.4-x64-mingw-ucrt) sha256=babc82166fd81580b1ff6c5a5d5aec414be14e592443ede2d849355e0dddca08
+  sqlite3 (2.7.4-x86_64-linux-gnu) sha256=0755b458f5501e89c0d5a0003afc4fdd6fd059eb1fb1424221532917096da4be
 
 BUNDLED WITH
   4.0.17
