@@ -98,7 +98,8 @@ module Later
     def every(expression, name: nil, timezone: nil, target: nil, method_name: nil, args: [], kwargs: {}, retries: 0, backoff: :fixed, timeout: nil, priority: :normal, queue: "default", tags: [], concurrency_key: nil, idempotency_key: nil, &block)
       recurrence = Recurrence.parse(expression, timezone: timezone)
       descriptor = callable_descriptor(target, method_name, args, kwargs)
-      schedule(recurrence.first_after(Clock.now), interval: recurrence.interval, recurrence: recurrence.to_h, name: name, retries: retries, backoff: backoff, timeout: timeout, priority: priority, queue: queue, tags: tags, concurrency_key: concurrency_key, idempotency_key: idempotency_key, descriptor: descriptor, &block)
+      first_run = recurrence.kind == "interval" ? Clock.now : recurrence.first_after(Clock.now)
+      schedule(first_run, interval: recurrence.interval, recurrence: recurrence.to_h, name: name, retries: retries, backoff: backoff, timeout: timeout, priority: priority, queue: queue, tags: tags, concurrency_key: concurrency_key, idempotency_key: idempotency_key, descriptor: descriptor, &block)
     end
 
     def run_once(limit: 10, lease_seconds: 300)
@@ -226,7 +227,8 @@ module Later
 
     def execute_callable(descriptor)
       target = descriptor.fetch("target").split("::").reject(&:empty?).inject(Object) { |scope, name| scope.const_get(name) }
-      target.public_send(descriptor.fetch("method"), *descriptor.fetch("args", []), **descriptor.fetch("kwargs", {}))
+      kwargs = descriptor.fetch("kwargs", {}).transform_keys(&:to_sym)
+      target.public_send(descriptor.fetch("method"), *descriptor.fetch("args", []), **kwargs)
     end
 
     def invoke(handler, row)

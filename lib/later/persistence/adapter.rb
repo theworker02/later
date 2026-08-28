@@ -3,7 +3,7 @@
 require_relative "../storage/adapter"
 
 module Later
-  module Persistence
+  class Persistence
     Adapter = Storage::Adapter unless const_defined?(:Adapter)
   end
 end

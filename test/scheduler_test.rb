@@ -10,7 +10,7 @@ class SchedulerTest < Minitest::Test
     assert_equal [job.id], Later.scheduler.run_once
     assert_equal [:ran], calls
     assert_equal "completed", Later.list.first["state"]
-    assert_equal ["started", "completed"], Later.scheduler.inspect(job.id)[:events].map { |event| event["type"] }
+    assert_equal ["dispatched", "started", "completed"], Later.scheduler.inspect(job.id)[:events].map { |event| event["type"] }
   end
 
   def test_named_job_can_be_reloaded_from_persistent_storage
@@ -47,7 +47,7 @@ class SchedulerTest < Minitest::Test
 
     Later.scheduler.persistence.instance_variable_get(:@db).execute("UPDATE jobs SET run_at = ?", Time.now.to_f)
     Later.scheduler.run_once
-    assert_equal "failed", Later.list.first["state"]
+    assert_equal "dead", Later.list.first["state"]
     assert_equal 2, Later.list.first["attempts"]
   end
 end

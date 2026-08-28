@@ -116,6 +116,14 @@ module Later
       (@workflow_registry ||= Workflows::Registry.new).list
     end
 
+    def register(name, &block)
+      scheduler.register(name, &block)
+    end
+
+    def run(name: nil, **options, &block)
+      scheduler.run(name: name, **options, &block)
+    end
+
     def in(duration, **options, &block)
       seconds = duration.is_a?(Numeric) ? duration : Recurrence.duration(duration)
       scheduler.in_duration(seconds, **options, &block)
