@@ -1,9 +1,82 @@
 ---
-const sections = [
-  ['Installation', 'Install the gem and configure a SQLite database.'],
-  ['Durable jobs', 'Use Later.call for restart-safe constant and method dispatch.'],
-  ['Schedules', 'Use intervals and weekday recurrence rules with explicit timezone metadata.'],
-  ['Workflows', 'Define and validate dependency graphs before execution.']
-];
+const base = import.meta.env.BASE_URL;
+const asset = (path) => `${base}${path}`;
+const link = (path) => `${base}${path}`;
 ---
-<html lang="en"><head><title>later documentation</title></head><body><main><h1>Documentation</h1><ul>{sections.map(([name, text]) => <li><strong>{name}</strong>: {text}</li>)}</ul></main></body></html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="Get started with later, durable time and workflows for Ruby." />
+    <link rel="icon" href={asset('favicon.svg')} />
+    <link rel="stylesheet" href={asset('styles/site.css')} />
+    <title>Getting started — later</title>
+  </head>
+  <body>
+    <header class="site-shell site-nav">
+      <a href={link('')} aria-label="later home"><img src={asset('brand/later-wordmark.svg')} alt="later" /></a>
+      <nav class="site-nav-links" aria-label="Primary navigation">
+        <a href={link('')}>Home</a>
+        <a href="https://github.com/theworker02/later">GitHub</a>
+      </nav>
+    </header>
+
+    <main class="site-shell docs-main">
+      <div class="eyebrow">Getting started</div>
+      <h1>Make time durable.</h1>
+      <p class="hero-lede">`later` is a local-first temporal runtime for plain Ruby. It persists work in SQLite, recovers leased jobs after failures, and gives you a small CLI for operations.</p>
+
+      <div class="notice"><strong>Prerelease boundary:</strong> this development line targets Ruby 3.2+, local SQLite, and at-least-once delivery. PostgreSQL, Rails/Active Job, hosted dashboards, network transports, full calendar/DST parsing, and OpenTelemetry exporters are not shipped core features.</div>
+
+      <h2>1. Install</h2>
+      <p>Install the gem into an application with a working SQLite native extension:</p>
+      <pre><code>gem install later</code></pre>
+      <p>For Bundler:</p>
+      <pre><code>gem "later"</code></pre>
+
+      <h2>2. Configure a database</h2>
+      <p>Point the runtime at an application-owned SQLite path before scheduling work:</p>
+      <pre><code>require "later"
+
+Later.configure(path: "tmp/later.sqlite3")</code></pre>
+
+      <h2>3. Schedule durable work</h2>
+      <p>Use named dispatch for work that must survive a process restart:</p>
+      <pre><code>class Reports
+  def self.generate_monthly(month:)
+    # Build the report.
+  end
+end
+
+Later.call(Reports, :generate_monthly,
+  at: "2026-09-01 09:00",
+  month: "2026-08")</code></pre>
+      <p>Use intervals or weekday rules for recurring work:</p>
+      <pre><code>Later.every("15m") { Metrics.flush }
+Later.every("weekday at 09:00", timezone: "UTC") { Digest.send }</code></pre>
+
+      <h2>4. Run and inspect the worker</h2>
+      <pre><code>later run --db tmp/later.sqlite3
+later jobs --json --db tmp/later.sqlite3
+later doctor --db tmp/later.sqlite3
+later db check --db tmp/later.sqlite3</code></pre>
+
+      <h2>5. Explore streams and workflows</h2>
+      <p>Use <code>Later.workflow</code> for validated dependency graphs and <code>Later::Stream</code> for durable append-only events with consumer groups. These surfaces are part of the prerelease line and retain the same at-least-once delivery model.</p>
+      <p>Continue with the repository documentation for <a href="https://github.com/theworker02/later/blob/main/docs/streams.md">streams</a>, <a href="https://github.com/theworker02/later/blob/main/docs/scheduling/timezones.md">time zones</a>, <a href="https://github.com/theworker02/later/blob/main/docs/security/serialization.md">serialization safety</a>, and the <a href="https://github.com/theworker02/later/blob/main/ROADMAP.md">roadmap</a>.</p>
+
+      <h2>Reliability model</h2>
+      <ul>
+        <li>Jobs are persisted before dispatch and claimed through leases.</li>
+        <li>Expired leases make eligible work available for recovery.</li>
+        <li>External effects are at-least-once, not exactly-once.</li>
+        <li>Handlers and consumers should be repeat-safe and use idempotency keys.</li>
+      </ul>
+    </main>
+
+    <footer class="site-shell site-footer">
+      <p><strong>later</strong> — Durable time and workflows for Ruby.</p>
+      <p><a href={link('')}>Back to home</a> · <a href="https://github.com/theworker02/later">Source on GitHub</a></p>
+    </footer>
+  </body>
+</html>

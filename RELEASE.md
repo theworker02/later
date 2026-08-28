@@ -1,6 +1,6 @@
 # Release guide
 
-The current release is `1.2.0.pre.1`, published as the prerelease tag `v1.2.0.pre.1`. It is a development release, not a stable `1.2.0` release. The repository is configured with the `origin` remote at `https://github.com/theworker02/later.git`; RubyGems publication is intentionally not part of this release task.
+The current release is `1.2.0.pre.1`, published as the prerelease tag `v1.2.0.pre.1`. It is a development release, not a stable `1.2.0` release. The repository is configured with the `origin` remote at `https://github.com/theworker02/later.git`. Future tagged releases are configured to publish through RubyGems Trusted Publishing and attach the built `.gem`—including the `later` CLI—to the matching GitHub release; `v1.2.0.pre.1` predates that automation.
 
 ## v1.2.0.pre.1 release state
 
@@ -20,14 +20,14 @@ The current release is `1.2.0.pre.1`, published as the prerelease tag `v1.2.0.pr
 6. Inspect the artifact and run `ruby scripts/verify_gem later-*.gem`.
 7. Install the artifact into a clean Ruby environment and run a smoke test using `require "later"`.
 8. Verify the version, changelog, README, gemspec, and generated artifact agree.
-9. Commit release metadata, create the annotated tag `v1.2.0.pre.1`, and push the commit and tag normally.
-10. Publish the GitHub prerelease with the detailed notes file. Do not publish to RubyGems without an explicit release decision and configured trusted publishing.
+9. Commit release metadata, create the annotated version tag, and push the commit and tag normally.
+10. Verify that the tag workflow creates or updates the GitHub release, attaches the built `.gem` containing the `later` CLI, and publishes the gem to RubyGems through Trusted Publishing.
 
 ## Validation record for v1.2.0.pre.1
 
 - Ruby syntax checks passed for the release sources.
 - `later-1.2.0.pre.1.gem` built successfully and passed `scripts/verify_gem`.
-- The unpacked artifact contained only the intended runtime `lib/`, `exe/`, `LICENSE`, and `README.md` content.
+- The unpacked artifact contained the intended runtime `lib/`, executable `exe/`, original `assets/` branding/media, `LICENSE`, and `README.md` content.
 - An isolated gem installation succeeded with dependencies ignored.
 - Source-only recurrence, stream, and schema smoke checks passed.
 - The full SQLite-backed test suite and `require "later"` runtime smoke test are blocked locally by the Windows `sqlite3-2.7.4-x64-mingw-ucrt` native extension error: `sqlite3_native.so: The specified procedure could not be found`.

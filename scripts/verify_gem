@@ -5,9 +5,19 @@ require "rubygems/package"
 
 path = ARGV.fetch(0) { Dir["later-*.gem"].first }
 abort "gem artifact not found" unless path
-entries = []
-File.open(path, "rb") do |io|
-  Gem::Package::TarReader.new(io).each { |entry| entries << entry.full_name }
-end
+
+package = Gem::Package.new(path)
+package.verify
+entries = package.contents
+required_entries = %w[
+  exe/later
+  lib/later.rb
+  assets/brand/later-mark.svg
+  assets/brand/later-wordmark.svg
+  assets/media/later-cli-screenshot.svg
+  assets/media/later-cli-demo.svg
+]
+missing_entries = required_entries - entries
+abort "gem is missing required files: #{missing_entries.join(", ")}" unless missing_entries.empty?
 abort "gem contains database files" if entries.any? { |entry| entry.match?(/\.sqlite|\.db\z/) }
-puts "Verified #{path}: #{entries.length} entries"
+puts "Verified #{path}: #{entries.length} entries (including exe/later)"

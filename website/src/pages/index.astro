@@ -1,14 +1,93 @@
 ---
-const title = 'later — Durable time and workflows for Ruby';
+const base = import.meta.env.BASE_URL;
+const asset = (path) => `${base}${path}`;
+const link = (path) => `${base}${path}`;
+
+const capabilities = [
+  ['Durable jobs', 'SQLite-backed scheduling with leases, retries, deadlines, and crash recovery.'],
+  ['Temporal rules', 'Intervals, weekday schedules, timezone metadata, and recurrence simulation.'],
+  ['Workflows and events', 'Validated DAGs, durable payloads, filtered subscriptions, and futures.'],
+  ['Durable streams', 'Append-only SQLite streams with offsets, consumer groups, replay, and rewind.'],
+  ['Operational CLI', 'Inspect jobs, review history, lint schedules, diagnose databases, and manage streams.'],
+  ['Plain Ruby', 'A focused local runtime with no hosted service or framework adapter required.']
+];
 ---
 <html lang="en">
-  <head><meta charset="utf-8" /><meta name="viewport" content="width=device-width" /><title>{title}</title></head>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="later — durable time and workflows for Ruby, backed by local SQLite." />
+    <link rel="icon" href={asset('favicon.svg')} />
+    <link rel="stylesheet" href={asset('styles/site.css')} />
+    <title>later — Durable time and workflows for Ruby</title>
+  </head>
   <body>
+    <header class="site-shell site-nav">
+      <a href={link('')} aria-label="later home"><img src={asset('brand/later-wordmark.svg')} alt="later" /></a>
+      <nav class="site-nav-links" aria-label="Primary navigation">
+        <a href={link('docs/getting-started')}>Get started</a>
+        <a href="https://github.com/theworker02/later">GitHub</a>
+        <a href={link('docs/getting-started')} class="button">Documentation</a>
+      </nav>
+    </header>
+
     <main>
-      <h1>later</h1>
-      <p>Durable time and workflows for Ruby.</p>
-      <pre><code>{`Later.in("30m") { Cleanup.run }`}</code></pre>
-      <p><a href="/docs/getting-started">Get started</a></p>
+      <section class="site-shell hero">
+        <div>
+          <div class="eyebrow">Local-first temporal runtime</div>
+          <h1>Make time <span>durable.</span></h1>
+          <p class="hero-lede">later brings durable scheduling, recoverable work, events, workflows, and SQLite-backed streams to plain Ruby applications.</p>
+          <div class="hero-actions">
+            <a class="button" href={link('docs/getting-started')}>Start with later</a>
+            <a class="button secondary" href="https://github.com/theworker02/later">View source</a>
+          </div>
+        </div>
+        <div class="hero-art">
+          <img src={asset('media/later-cli-demo.svg')} alt="Animated terminal demo showing a later job moving through a lease" />
+        </div>
+      </section>
+
+      <section class="site-shell section" aria-labelledby="capabilities-heading">
+        <div class="section-header">
+          <div class="eyebrow">One small runtime</div>
+          <h2>From delayed calls to durable local coordination.</h2>
+          <p>Keep persistence, scheduling, and operational visibility close to the application while the project is still easy to run and test.</p>
+        </div>
+        <div class="grid">
+          {capabilities.map(([title, description]) => (
+            <article class="card"><h3>{title}</h3><p>{description}</p></article>
+          ))}
+        </div>
+      </section>
+
+      <section class="site-shell section" aria-labelledby="install-heading">
+        <div class="section-header">
+          <div class="eyebrow">Five-minute start</div>
+          <h2 id="install-heading">Install the gem. Keep the database local.</h2>
+        </div>
+        <div class="install-panel">
+          <pre><code><span class="accent">$</span> gem install later
+<span class="accent">$</span> later jobs --json --db tmp/later.sqlite3</code></pre>
+          <div class="notice"><strong>Development release:</strong> the current line targets Ruby 3.2+, plain Ruby, and local SQLite. Delivery is at-least-once, so handlers and consumers should be repeat-safe.</div>
+        </div>
+      </section>
+
+      <section class="site-shell section" aria-labelledby="media-heading">
+        <div class="section-header">
+          <div class="eyebrow">See the interface</div>
+          <h2 id="media-heading">Operational clarity at the command line.</h2>
+          <p>The installed CLI makes durable state inspectable without a separate dashboard service.</p>
+        </div>
+        <div class="split-media">
+          <figure class="media-card"><img src={asset('media/later-cli-screenshot.svg')} alt="later CLI screenshot showing jobs in JSON and a database health check" /><figcaption>Inspect jobs, queues, leases, and database health from the installed command.</figcaption></figure>
+          <figure class="media-card"><img src={asset('media/later-cli-demo.svg')} alt="Animated later CLI demo showing a job moving from scheduled to complete" /><figcaption>Animated SVG demo of a persisted job moving through a recoverable lease.</figcaption></figure>
+        </div>
+      </section>
     </main>
+
+    <footer class="site-shell site-footer">
+      <p><strong>later</strong> — Durable time and workflows for Ruby.</p>
+      <p><a href="https://github.com/theworker02/later">Source on GitHub</a> · MIT licensed · current line `1.2.0.pre.1`</p>
+    </footer>
   </body>
 </html>

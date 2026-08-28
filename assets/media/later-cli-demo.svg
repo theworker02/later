@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 840" role="img" aria-labelledby="title desc">
+  <title id="title">Animated later CLI demo</title>
+  <desc id="desc">An animated terminal-style demonstration of a later job moving from scheduled to running to complete.</desc>
+  <defs>
+    <linearGradient id="screen" x1="0" y1="0" x2="1440" y2="840" gradientUnits="userSpaceOnUse"><stop stop-color="#101828"/><stop offset="1" stop-color="#18243c"/></linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#67e8f9"/><stop offset="1" stop-color="#a78bfa"/></linearGradient>
+  </defs>
+  <rect width="1440" height="840" rx="30" fill="#e8edf5"/><rect x="54" y="54" width="1332" height="732" rx="22" fill="url(#screen)"/>
+  <circle cx="94" cy="96" r="10" fill="#fb7185"/><circle cx="128" cy="96" r="10" fill="#fbbf24"/><circle cx="162" cy="96" r="10" fill="#34d399"/>
+  <text x="210" y="104" fill="#94a3b8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="22">later — durable local runtime</text>
+  <text x="108" y="176" fill="#67e8f9" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="23">$</text><text x="140" y="176" fill="#f8fafc" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="23">later jobs --json --db tmp/later.sqlite3</text>
+  <rect x="108" y="230" width="1120" height="72" rx="14" fill="#202f4b" stroke="#334a70"/><circle cx="150" cy="266" r="12" fill="#67e8f9"><animate attributeName="r" values="12;16;12" dur="1.6s" repeatCount="indefinite"/></circle>
+  <text x="188" y="274" fill="#e2e8f0" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="22">lat_01H9...  ·  <tspan fill="#67e8f9"><animate attributeName="fill" values="#67e8f9;#fbbf24;#34d399;#67e8f9" dur="4.8s" repeatCount="indefinite"/>scheduled</tspan></text>
+  <text x="108" y="376" fill="#94a3b8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="21">lease</text><rect x="206" y="354" width="860" height="20" rx="10" fill="#273958"/><rect x="206" y="354" width="180" height="20" rx="10" fill="url(#accent)"><animate attributeName="width" values="180;650;860;180" dur="4.8s" repeatCount="indefinite"/></rect>
+  <text x="108" y="470" fill="#34d399" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="23">OK</text><text x="174" y="470" fill="#e2e8f0" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="23">persisted before dispatch · recoverable after lease expiry</text>
+  <text x="108" y="590" fill="#a78bfa" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="21">at-least-once delivery · idempotent handlers · SQLite WAL</text>
+  <text x="108" y="704" fill="#64748b" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18">animated SVG demo · later 1.2.0.pre.1</text>
+</svg>

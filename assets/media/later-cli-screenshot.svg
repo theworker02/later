@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 840" role="img" aria-labelledby="title desc">
+  <title id="title">later CLI screenshot</title>
+  <desc id="desc">A terminal view showing later jobs in JSON format and a durable job history.</desc>
+  <defs>
+    <linearGradient id="screen" x1="0" y1="0" x2="1440" y2="840" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#101828"/>
+      <stop offset="1" stop-color="#18243c"/>
+    </linearGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="#67e8f9"/>
+      <stop offset="1" stop-color="#a78bfa"/>
+    </linearGradient>
+  </defs>
+  <rect width="1440" height="840" rx="30" fill="#e8edf5"/>
+  <rect x="54" y="54" width="1332" height="732" rx="22" fill="url(#screen)"/>
+  <circle cx="94" cy="96" r="10" fill="#fb7185"/><circle cx="128" cy="96" r="10" fill="#fbbf24"/><circle cx="162" cy="96" r="10" fill="#34d399"/>
+  <text x="210" y="104" fill="#94a3b8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="22">later — durable local runtime</text>
+  <text x="108" y="176" fill="#67e8f9" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="23">$</text>
+  <text x="140" y="176" fill="#f8fafc" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="23">later jobs --json --db tmp/later.sqlite3</text>
+  <text x="108" y="232" fill="#a78bfa" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="21">[</text>
+  <text x="138" y="270" fill="#cbd5e1" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="21">{"public_id":"lat_01H8...","state":"scheduled","queue":"default"},</text>
+  <text x="138" y="308" fill="#cbd5e1" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="21">{"public_id":"lat_01H9...","state":"running","queue":"mailers"},</text>
+  <text x="108" y="346" fill="#a78bfa" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="21">]</text>
+  <text x="108" y="424" fill="#67e8f9" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="23">$</text>
+  <text x="140" y="424" fill="#f8fafc" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="23">later doctor --db tmp/later.sqlite3</text>
+  <rect x="108" y="470" width="1120" height="2" fill="url(#line)" opacity=".65"/>
+  <text x="108" y="526" fill="#34d399" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="23">OK</text>
+  <text x="174" y="526" fill="#e2e8f0" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="23">database accessible · migrations current · leases enabled</text>
+  <text x="108" y="590" fill="#94a3b8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="20">SQLite WAL  |  at-least-once delivery  |  repeat-safe handlers</text>
+  <text x="108" y="704" fill="#64748b" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18">later 1.2.0.pre.1 · plain Ruby · local-first</text>
+</svg>
