@@ -4,7 +4,7 @@
 
 `later` is a local-first temporal runtime for plain Ruby. It persists scheduled operations in SQLite, recovers leased work after crashes, records execution history, and provides an expressive path from one delayed call to recurring jobs, events, futures, and validated workflow graphs.
 
-> Current release line: `1.1.0.pre.1`. This is a development release; the project does not claim PostgreSQL, Rails, dashboard, or hosted-docs support until those extensions have their own implementations and CI.
+> Current release line: `1.2.0.pre.1`. This is a development release; the project does not claim PostgreSQL, Rails, dashboard, network transport, hosted-docs, full calendar/DST, or OpenTelemetry exporter support until those extensions have their own implementations and CI.
 
 ## Install
 
