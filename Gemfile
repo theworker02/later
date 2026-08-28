@@ -2,5 +2,5 @@
 
 source "https://rubygems.org"
 
-gem "sqlite3", "= 2.7.4"
+gem "sqlite3", "2.8.1"
 gem "rake", "= 13.2.1"
