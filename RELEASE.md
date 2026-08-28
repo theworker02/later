@@ -1,6 +1,6 @@
 # Release guide
 
-The current release target is `1.2.0.pre.1`, planned for publication as the prerelease tag `v1.2.0.pre.1`. It is a development release, not a stable `1.2.0` release. The repository is configured with the `origin` remote at `https://github.com/theworker02/later.git`; RubyGems publication is intentionally not part of this release task.
+The current release is `1.2.0.pre.1`, published as the prerelease tag `v1.2.0.pre.1`. It is a development release, not a stable `1.2.0` release. The repository is configured with the `origin` remote at `https://github.com/theworker02/later.git`; RubyGems publication is intentionally not part of this release task.
 
 ## v1.2.0.pre.1 release state
 
