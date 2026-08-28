@@ -16,7 +16,7 @@ jobs:
       - run: bundle exec rake test
       - run: gem build later.gemspec
       - run: ruby scripts/verify_gem later-*.gem
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: gem
           path: later-*.gem
