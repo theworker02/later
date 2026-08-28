@@ -7,8 +7,14 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+    environment: release
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.3'
@@ -16,7 +22,4 @@ jobs:
       - run: bundle exec rake test
       - run: gem build later.gemspec
       - run: ruby scripts/verify_gem later-*.gem
-      - uses: actions/upload-artifact@v4
-        with:
-          name: gem
-          path: later-*.gem
+      - uses: rubygems/release-gem@v1
