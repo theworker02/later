@@ -1,7 +1,7 @@
 ---
 const base = import.meta.env.BASE_URL;
-const asset = (path) => `${base}${path}`;
-const link = (path) => `${base}${path}`;
+const asset = (path: string) => `${base}${path}`;
+const link = (path: string) => `${base}${path}`;
 ---
 <html lang="en">
   <head>
@@ -52,8 +52,8 @@ Later.call(Reports, :generate_monthly,
   at: "2026-09-01 09:00",
   month: "2026-08")</code></pre>
       <p>Use intervals or weekday rules for recurring work:</p>
-      <pre><code>Later.every("15m") { Metrics.flush }
-Later.every("weekday at 09:00", timezone: "UTC") { Digest.send }</code></pre>
+      <pre><code>Later.every("15m") &#123; Metrics.flush &#125;
+Later.every("weekday at 09:00", timezone: "UTC") &#123; Digest.send &#125;</code></pre>
 
       <h2>4. Run and inspect the worker</h2>
       <pre><code>later run --db tmp/later.sqlite3

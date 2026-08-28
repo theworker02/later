@@ -1,7 +1,7 @@
 ---
 const base = import.meta.env.BASE_URL;
-const asset = (path) => `${base}${path}`;
-const link = (path) => `${base}${path}`;
+const asset = (path: string) => `${base}${path}`;
+const link = (path: string) => `${base}${path}`;
 
 const capabilities = [
   ['Durable jobs', 'SQLite-backed scheduling with leases, retries, deadlines, and crash recovery.'],

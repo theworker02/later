@@ -10,6 +10,7 @@
 <p align="center">
   <a href="https://github.com/theworker02/later/actions/workflows/ci.yml"><img src="https://github.com/theworker02/later/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI status"></a>
   <a href="https://github.com/theworker02/later/actions/workflows/pages.yml"><img src="https://github.com/theworker02/later/actions/workflows/pages.yml/badge.svg?branch=main" alt="Documentation status"></a>
+  <a href="https://rubygems.org/gems/later">RubyGems package</a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111827.svg" alt="MIT license"></a>
   <a href="https://www.ruby-lang.org/en/"> <img src="https://img.shields.io/badge/ruby-%3E%3D%203.2-CC342D.svg" alt="Ruby 3.2 or newer"></a>
 </p>
@@ -37,6 +38,8 @@ The same runtime can grow from a single delayed call into recurring work, durabl
 ## Install
 
 `later` targets Ruby **3.2 or newer** and requires a working `sqlite3` native extension for the host platform.
+
+Install the released package from [RubyGems](https://rubygems.org/gems/later):
 
 ```sh
 gem install later
