@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/brand/later-wordmark.svg" alt="later â€” Durable time and workflows for Ruby" width="420">
+  <img src="assets/brand/later-wordmark.svg" alt="later Ã¢â‚¬â€ Durable time and workflows for Ruby" width="420">
 </p>
 
 <p align="center">
@@ -272,11 +272,11 @@ README.md             Package and project overview
 
 The repository also contains:
 
-- `test/` â€” unit and integration behavior;
-- `examples/` â€” runnable, application-shaped examples;
-- `docs/` â€” focused scheduling, stream, CLI, migration, and security documentation;
-- `website/` â€” Astro documentation site using the same visual identity;
-- `.github/` â€” CI, security, dependency, Pages, and release automation.
+- `test/` Ã¢â‚¬â€ unit and integration behavior;
+- `examples/` Ã¢â‚¬â€ runnable, application-shaped examples;
+- `docs/` Ã¢â‚¬â€ focused scheduling, stream, CLI, migration, and security documentation;
+- `website/` Ã¢â‚¬â€ Astro documentation site using the same visual identity;
+- `.github/` Ã¢â‚¬â€ CI, security, dependency, Pages, and release automation.
 
 ## Development
 
@@ -317,7 +317,7 @@ The current `1.2.0.pre.1` line is a development release. Consult [`RELEASE.md`](
 
 ## Contributing
 
-Contributions are welcome when they preserve the projectâ€™s explicit boundaries: plain Ruby and local SQLite in the core package, at-least-once delivery semantics, repeat-safe external effects, and no claims for integrations that are not implemented and tested.
+Contributions are welcome when they preserve the projectÃ¢â‚¬â„¢s explicit boundaries: plain Ruby and local SQLite in the core package, at-least-once delivery semantics, repeat-safe external effects, and no claims for integrations that are not implemented and tested.
 
 Good contributions usually include focused tests, documentation for public behavior, and a clear note about compatibility or migration impact. Keep changes small enough to review and avoid adding hosted-service assumptions to the core runtime.
 
@@ -331,3 +331,7 @@ Good contributions usually include focused tests, documentation for public behav
 ## License & acquisition
 
 This project is **proprietary**. Production use, redistribution, and commercial deployment require a written commercial license or completed acquisition. See [LICENSE](./LICENSE) and [ACQUISITION.md](./ACQUISITION.md). Contact [@theworker02](https://github.com/theworker02).
+
+## Acquisition diligence
+
+Buyer-facing diligence materials live in [docs/acquisition/](./docs/acquisition/). Commercial licensing contact path: [COMMERCIAL.md](./COMMERCIAL.md).
