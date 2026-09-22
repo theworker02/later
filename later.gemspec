@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.email = []
   spec.summary = "Durable time and workflows for Ruby"
   spec.description = "A local-first SQLite-backed temporal runtime for plain Ruby applications."
-  spec.license = "MIT"
+  spec.license = "Proprietary"
   spec.required_ruby_version = ">= 3.2"
 
   spec.files = Dir["lib/**/*", "exe/*", "assets/**/*", "LICENSE", "README.md"]

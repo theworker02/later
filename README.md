@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/brand/later-wordmark.svg" alt="later Ã¢â‚¬â€ Durable time and workflows for Ruby" width="420">
+  <img src="assets/brand/later-wordmark.svg" alt="later ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Durable time and workflows for Ruby" width="420">
 </p>
 
 <p align="center">
@@ -11,35 +11,7 @@
   <a href="https://github.com/theworker02/later/actions/workflows/ci.yml"><img src="https://github.com/theworker02/later/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI status"></a>
   <a href="https://github.com/theworker02/later/actions/workflows/pages.yml"><img src="https://github.com/theworker02/later/actions/workflows/pages.yml/badge.svg?branch=main" alt="Documentation status"></a>
   <a href="https://rubygems.org/gems/later">RubyGems package</a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111827.svg" alt="MIT license"></a>
-  <a href="https://www.ruby-lang.org/en/"> <img src="https://img.shields.io/badge/ruby-%3E%3D%203.2-CC342D.svg" alt="Ruby 3.2 or newer"></a>
-</p>
-
-> **Development release:** `1.2.0.pre.1` is a prerelease. The public API may change before a stable `1.2.0` release. The supported core is plain Ruby with local SQLite; PostgreSQL, Rails/Active Job, an authenticated dashboard, network transports, hosted documentation, full calendar/DST parsing, and OpenTelemetry exporters are not claimed as shipped features.
-
-## Why later?
-
-Applications often need more than a timer and less than a hosted orchestration platform. `later` keeps durable scheduling close to the application: jobs are persisted in SQLite, claimed through leases, recoverable after process failure, and inspectable from Ruby or the command line.
-
-The same runtime can grow from a single delayed call into recurring work, durable events, futures, workflow graphs, and SQLite-backed streams without requiring a separate service or a framework adapter. The result is a small, explicit coordination layer that is easy to run locally and straightforward to test.
-
-### At a glance
-
-| Capability | What `later` provides |
-| --- | --- |
-| Storage | SQLite persistence with WAL mode, migrations, busy timeouts, leases, and recovery |
-| Scheduling | Delayed jobs, intervals, weekday rules, timezone metadata, simulation, and virtual-clock helpers |
-| Dispatch | Named constant/method calls, priorities, queues, tags, retries, timeouts, deadlines, and idempotency keys |
-| Reliability | Heartbeats, lease expiry recovery, worker supervision, circuit breakers, rate limiting, and immutable history |
-| Composition | Futures, durable events, filtered subscriptions, validated DAG workflows, and journal boundaries |
-| Streams | Append-only SQLite streams with offsets, consumer groups, replay, rewind, retention, and schema validation |
-| Operations | A portable `later` CLI for inspection, simulation, linting, diagnostics, and stream administration |
-
-## Install
-
-`later` targets Ruby **3.2 or newer** and requires a working `sqlite3` native extension for the host platform.
-
-Install the released package from [RubyGems](https://rubygems.org/gems/later):
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-proprietary-0B1F33):
 
 ```sh
 gem install later
@@ -272,11 +244,11 @@ README.md             Package and project overview
 
 The repository also contains:
 
-- `test/` Ã¢â‚¬â€ unit and integration behavior;
-- `examples/` Ã¢â‚¬â€ runnable, application-shaped examples;
-- `docs/` Ã¢â‚¬â€ focused scheduling, stream, CLI, migration, and security documentation;
-- `website/` Ã¢â‚¬â€ Astro documentation site using the same visual identity;
-- `.github/` Ã¢â‚¬â€ CI, security, dependency, Pages, and release automation.
+- `test/` ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â unit and integration behavior;
+- `examples/` ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â runnable, application-shaped examples;
+- `docs/` ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â focused scheduling, stream, CLI, migration, and security documentation;
+- `website/` ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Astro documentation site using the same visual identity;
+- `.github/` ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â CI, security, dependency, Pages, and release automation.
 
 ## Development
 
@@ -317,7 +289,7 @@ The current `1.2.0.pre.1` line is a development release. Consult [`RELEASE.md`](
 
 ## Contributing
 
-Contributions are welcome when they preserve the projectÃ¢â‚¬â„¢s explicit boundaries: plain Ruby and local SQLite in the core package, at-least-once delivery semantics, repeat-safe external effects, and no claims for integrations that are not implemented and tested.
+Contributions are welcome when they preserve the projectÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢s explicit boundaries: plain Ruby and local SQLite in the core package, at-least-once delivery semantics, repeat-safe external effects, and no claims for integrations that are not implemented and tested.
 
 Good contributions usually include focused tests, documentation for public behavior, and a clear note about compatibility or migration impact. Keep changes small enough to review and avoid adding hosted-service assumptions to the core runtime.
 
