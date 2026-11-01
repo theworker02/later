@@ -7,8 +7,8 @@ GEM
       prism (~> 1.5)
     prism (1.9.0)
     rake (13.2.1)
-    sqlite3 (2.9.6-x64-mingw-ucrt)
-    sqlite3 (2.9.6-x86_64-linux-gnu)
+    sqlite3 (2.10.2-x64-mingw-ucrt)
+    sqlite3 (2.10.2-x86_64-linux-gnu)
 
 PLATFORMS
   x64-mingw-ucrt
@@ -17,15 +17,15 @@ PLATFORMS
 DEPENDENCIES
   minitest (= 6.0.6)
   rake (= 13.2.1)
-  sqlite3 (= 2.9.6)
+  sqlite3 (= 2.10.2)
 
 CHECKSUMS
   drb (2.2.3) sha256=0b00d6fdb50995fe4a45dea13663493c841112e4068656854646f418fda13373
   minitest (6.0.6) sha256=153ea36d1d987a62942382b61075745042a2b3123b1cd48f4c3675af9cc7d6f1
   prism (1.9.0) sha256=7b530c6a9f92c24300014919c9dcbc055bf4cdf51ec30aed099b06cd6674ef85
   rake (13.2.1) sha256=46cb38dae65d7d74b6020a4ac9d48afed8eb8149c040eccf0523bec91907059d
-  sqlite3 (2.9.6-x64-mingw-ucrt) sha256=1f2b88f417fd0a8c1d5ef19c7e817d8b9c61bee6e33b6b36255fb6e40148e6f8
-  sqlite3 (2.9.6-x86_64-linux-gnu) sha256=613188ce02f614126ddbc38c5e217ccffd6306d0dcd9adca9764547aa890a634
+  sqlite3 (2.10.2-x64-mingw-ucrt) sha256=7fe1bf1adfca4fffeaec27371e0a20c1162d9d985681ec9560971a44fc41d198
+  sqlite3 (2.10.2-x86_64-linux-gnu) sha256=ca92731ab464df9cae503fa1a439a549e2724f6953c8c05a7769b59366e38f15
 
 BUNDLED WITH
    2.6.9
